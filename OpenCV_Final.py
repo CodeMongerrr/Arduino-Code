@@ -38,11 +38,10 @@ def aruco_coordinates(img,aru_length,aru_height,bound_height,bound_length,angle)
             (tl,tr,br,bl) = corner
             bl = (int(bl[0]),int(bl[1]))
             br = (int(br[0]),int(br[1]))
-            m = ((br[1]-bl[1])/(br[0]-bl[0]))           #finding slope
+            m = ((br[1]-bl[1])/(br[0]-bl[0]))           
             fi = math.atan(m)
-            a = fi * 180/math.pi                             #finding inclined angle of arucos
-            # print(np.shape(img))
-            img = imutils.rotate_bound(img,-a)               #rotating the arucos
+            a = fi * 180/math.pi
+            img = imutils.rotate_bound(img,-a)               
             (c, i, r) = findAruco(img)
             if len(c) > 0:
                 i = i.flatten()
@@ -65,7 +64,7 @@ def aruco_coordinates(img,aru_length,aru_height,bound_height,bound_length,angle)
     return img
 
 
-def color(color,lower,upper):     #function to detect color of squares
+def color(color,lower,upper):   
     if color[0] in range(lower[0],upper[0]+1):
         if color[1] in range(lower[1],upper[1]+1):
             if color[2] in range(lower[2], upper[2] + 1):
@@ -74,7 +73,7 @@ def color(color,lower,upper):     #function to detect color of squares
         return False
 
 
-def Result(img,id_list):    #function for detecting squares,its contours and imposing the aruco on the respective squares
+def Result(img,id_list):    
         img = cv2.imread("CVtask.jpg")
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         ret , thresh = cv2.threshold(gray, 230, 255, cv2.THRESH_BINARY)
